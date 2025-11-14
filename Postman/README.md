@@ -1,4 +1,4 @@
-**What Exactly Is Postman?**
+**API Testing with Postman**
 
 **Table of Contents:**
 
