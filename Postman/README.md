@@ -1,5 +1,3 @@
-**API Testing with Postman**
-
 **Table of Contents:**
 
 
@@ -18,15 +16,15 @@ Sounds good, right?
 
 This amazing tool streamlines the entire API lifecycle by providing a clean, user-friendly interface where you can:
 
-• Send and inspect HTTP requests
+👉 Send and inspect HTTP requests
 
-• Test API behavior using automated scripts
+👉 Test API behavior using automated scripts
 
-• Organize and document your work
+👉 Organize and document your work
 
-• Collaborate easily with your team
+👉 Collaborate easily with your team
 
-• Monitor API performance over time
+👉 Monitor API performance over time
 
 In short: Postman makes working with APIs easier, faster, and much more pleasant,  whether you're a beginner or an experienced QA.
 
@@ -49,7 +47,7 @@ Once you're there, choose your operating system, select the correct system type,
 After the installer has finished downloading, run it and follow the installation steps.
 You can safely go with the default settings, nothing complicated here.
 
-And… tcha-naaaam!! 🎉
+And… tcha-naaaam!! 🎉🎉
 
 Postman is installed, and you’re now ready to explore this powerful tool, test APIs, and hunt down even the most mysterious bugs.
 
@@ -63,7 +61,9 @@ Of course, you can use any other API you prefer, the way we use Postman will be 
 
 
 Before we start playing with Trello’s REST API in Postman, you’ll need to have your own Trello account.
+
 No account → no boards → no API access. Simple as that.
+
 Here’s what to do:
 1. Go to [Trello](https://trello.com/)
 2. Click on “Get Trello for free”
@@ -78,7 +78,6 @@ This is what you’ll see once you verify your email and log in to your Trello a
 To create a new board, cards, or anything else in Trello, you can do it manually, or you can do it through Trello’s APIs almost automatically.
 And this is where Postman comes in. It allows you to do all of this in a simple and easy way, while also helping you understand how APIs work and how to test them effectively.
 To learn how to do this, just check the [Roll up our sleeves section](#roll-up-our-sleeves)
-
 
 
 ### Trello's API
