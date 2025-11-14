@@ -2,11 +2,12 @@
 
 **Table of Contents:**
 
-1. What exaclty is Postman??
-2. Install Postman
-3. Before Anything Else: Create Your Trello Account
-4. Trello's API
-5. Roll up our sleeves
+- [What exaclty is Postman??](#what-exaclty-is-postman)
+- [Install Postman first](#install-postman-first)
+- [Before Anything Else: Create Your Trello Account](#before-anything-else-create-your-trello-account)
+- [Trello's API](#trellos-api)
+- [Roll up our sleeves](#roll-up-our-sleeves)
+
 
 
 ## What exaclty is Postman??
