@@ -2,12 +2,14 @@
 
 **Table of Contents:**
 
+
 - [What exaclty is Postman??](#what-exaclty-is-postman)
 - [Install Postman first](#install-postman-first)
-- [Before Anything Else: Create Your Trello Account](#before-anything-else-create-your-trello-account)
-- [Trello's API](#trellos-api)
+- [API Example Setup](#api-example-setup)
+  - [Create Your Trello Account](#create-your-trello-account)
+  - [Trello's API](#trellos-api)
+  - [Trello's Power Up, API Key and Token](#trellos-power-up-api-key-and-token)
 - [Roll up our sleeves](#roll-up-our-sleeves)
-
 
 
 ## What exaclty is Postman??
@@ -52,7 +54,9 @@ And… tcha-naaaam!! 🎉
 Postman is installed, and you’re now ready to explore this powerful tool, test APIs, and hunt down even the most mysterious bugs.
 
 
-## Before Anything Else: Create Your Trello Account
+## API Example Setup
+
+### Create Your Trello Account
 
 To show you how to use Postman, I’m going to use the Trello REST APIs as an example.
 Of course, you can use any other API you prefer, the way we use Postman will be exactly (or almost) the same.
@@ -73,11 +77,22 @@ This is what you’ll see once you verify your email and log in to your Trello a
 
 To create a new board, cards, or anything else in Trello, you can do it manually, or you can do it through Trello’s APIs almost automatically.
 And this is where Postman comes in. It allows you to do all of this in a simple and easy way, while also helping you understand how APIs work and how to test them effectively.
-To find how to do this just check the [roll up our sleeves section](#roll-up-our-sleeves)
+To learn how to do this, just check the [Roll up our sleeves section](#roll-up-our-sleeves)
 
 
 
-## Trello's API
+### Trello's API
+
+To learn how Trello’s APIs work, just type “Trello API” into Google’s search bar and click on the first link that appears, or go directly to their official documentation [Trello's API](https://developer.atlassian.com/cloud/trello/rest/).
+
+Here you’ll find an excellent manual explaining how [Trello's API](https://developer.atlassian.com/cloud/trello/rest/) works.
+On the left-hand menu, you’ll see all the available features and their corresponding API methods (GET, PUT, POST, DELETE, etc.) that you can use through Postman.
+
+
+### Trello's Power Up, API Key and Token
+
+Before we start making any calls, we need to create a Trello's Power-Up and then generate our API key and token.
+To create both, just follow the instructions in the [official guide](#https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/).
 
 
 ## Roll up our sleeves
