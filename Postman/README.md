@@ -96,3 +96,20 @@ To create both, just follow the instructions in the [official guide](#https://de
 
 ## Roll up our sleeves
 
+We can now finally start using Postman. As mentioned earlier, we will be working with Trello’s API, and the first request we will make is to create a board.
+To do this, we need to check Trello’s API documentation to understand how the request should be made.
+Go to the [Trello's API](https://developer.atlassian.com/cloud/trello/rest/), and in the menu on the left, look for “Board” and then click on “Create a Board”:
+
+
+To create a board, we must use the POST method, as specified in the API documentation. This endpoint includes required and optional parameters, all listed in the guide:
+
+For this request, we use the code example provided under “Create a Board”. The only part we need is the URL shown on the second line:
+
+In that URL, you can see the API key, the token, and the required name parameter:
+
+After pasting this URL into Postman, all the parameters will appear automatically, ready for you to fill in with your own values:
+
+
+
+
+
