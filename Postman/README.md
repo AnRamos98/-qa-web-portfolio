@@ -8,7 +8,11 @@
   - [Trello's API](#trellos-api)
   - [Trello's Power Up, API Key and Token](#trellos-power-up-api-key-and-token)
 - [Roll up our sleeves](#roll-up-our-sleeves)
-
+  - [Create a List](#create-a-list)
+  - [Create a Card](#create-a-card)
+  - [Updating a Card](#updating-a-card)
+  - [Delete a Card](#delete-a-card)
+  - [Delete a Board](#delete-a-board)
 
 ## What exaclty is Postman??
 Postman is an all-in-one API platform used not only by developers, but also by testers. It helps us build, test, and manage APIs in a simple and intuitive way.
@@ -91,7 +95,7 @@ On the left-hand menu, you’ll see all the available features and their corresp
 ### Trello's Power Up, API Key and Token
 
 Before we start making any calls, we need to create a Trello's Power-Up and then generate our API key and token.
-To create both, just follow the instructions in the [official guide](#https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/).
+To create both, just follow the instructions in the [official guide](https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/).
 
 
 ## Roll up our sleeves
@@ -100,14 +104,164 @@ We can now finally start using Postman. As mentioned earlier, we will be working
 To do this, we need to check Trello’s API documentation to understand how the request should be made.
 Go to the [Trello's API](https://developer.atlassian.com/cloud/trello/rest/), and in the menu on the left, look for “Board” and then click on “Create a Board”:
 
+![My image](./create_a_board_left_menu.png)
 
-To create a board, we must use the POST method, as specified in the API documentation. This endpoint includes required and optional parameters, all listed in the guide:
+To create a board, we must use the **POST** method, as specified in the API documentation. This endpoint includes required and optional parameters, all listed in the guide:
+
+![My image](./create_a_board_method.png)
 
 For this request, we use the code example provided under “Create a Board”. The only part we need is the URL shown on the second line:
 
-In that URL, you can see the API key, the token, and the required name parameter:
+![My image](./create_a_board_url.png)
+
+In that URL, you can see the `APIkey`, the `APItoken`, and the required name parameter:
+
+![My image](./url.png)
 
 After pasting this URL into Postman, all the parameters will appear automatically, ready for you to fill in with your own values:
+
+![My image](./postman_past_url.png)
+
+After you fill in all the necessary parameters, you can send the request to create a new board by clicking the Send button:
+
+![My image](./send_button.png)
+
+Once we click the Send button, we will receive a response from Trello’s API indicating that the request was completed successfully:
+
+![My image](./API_answer.png)
+
+If we open the Trello app, we can verify that a new board with the specified name has been created successfully. Impressive, isn’t it?
+
+![My image](./trello_board_created.png)
+
+Now we can test other requests like creating a list, creating a card, updating a card, deleting a card, and even deleting a whole board! Let’s do it and have a little fun with Postman!
+
+### Create a List
+
+To create a list, we need to use the **POST** method. The `name` and `idBoard` are required parameters, and of course we also need the `APIkey` and `APItoken` (even though they don’t appear in the required-parameters list, they do show up in the URL info). So let’s throw all of this into Postman and see what happens!
+
+![My image](./create_a_list.png)
+
+Just copy and paste the URL provided in Postman: 
+
+![My image](./postman_create_a_list.png)
+
+Don't forget that the `idBoard` is the one you got when you create a new board you can find it here:
+
+![My image](./id_board.png)
+
+Fill the corresponding fields:
+
+![My image](./postman_fill_fields.png)
+
+Click the Send button and verify that the API response was successful:
+
+![My image](./create_a_list_successfully_response.png)
+ 
+And check whether the list with the given name (List_name) appears on the Trello board:
+
+![My image](./Trello_list.png)
+
+
+### Create a Card
+
+To create a card, we need to use the **POST** method. The `idList` is a required parameter, and of course we also need the `CardName` (even though it’s not marked as required), plus the `APIkey` and `APItoken` (they don’t appear in the required parameters list, but they do show up in the URL info). So let’s toss all of this into Postman and see what happens!
+
+![My image](./create_a_card.png)
+
+Just copy and paste the URL provided in Postman: 
+
+![My image](./postman_create_a_card.png)
+
+As mentioned, we’ll need to add a name for the card. Even though it’s not a required field, it helps us keep things organized and actually know what we just created. As you can see, the card name isn’t included in the URL, so we’ll add it manually by appending `&name=CardName` to the end of the URL:
+
+![My image](./adding_card_name_url.png)
+
+
+Don't forget that the `idList` is the one you got when you create a new list you can find it here:
+
+![My image](./id_list.png)
+
+Fill the corresponding fields:
+
+![My image](./postman_fill_fields_card.png)
+
+Click the Send button and verify that the API response was successful:
+
+![My image](./create_a_card_successfully_response.png)
+ 
+And check whether the card with the given name (Card_name) appears on the Trello board:
+
+![My image](./Trello_card.png)
+
+
+### Updating a Card
+
+To update a card, we need to use the **PUT** method. The `id` is a required parameter, and we also need to add `&name=CardName` (even though it’s not marked as required but if we’re updating the card, we definitely need it), plus the `APIKey` and `APIToken` (they don’t appear in the required-parameters list, but they do show up in the URL info). So let’s toss all of this into Postman and see what happens!
+
+![My image](./update_a_card.png)
+
+Just copy and paste the URL provided in Postman: 
+
+![My image](./postman_updating_a_card.png)
+
+As mentioned, the `id` is a required parameter, and we also need to add `&name=CardName`. As we can see, the URL already contains the `id`, but it’s inside {}. We just need to remove the braces and add a : before the `id` so Postman recognizes it as a variable. As for `&name=CardName`, we’ll add it manually by appending it to the end of the URL: 
+
+![My image](./adding_id_url.png)
+
+The `id` is the `idCard` we got when we create a new card and you can find it here:
+
+![My image](./id_card.png)
+
+Fill the corresponding fields:
+
+![My image](./postman_fill_fields_updating_card.png)
+
+If you notice, we changed the card name to a different one. That’s the whole purpose of this request, updating the card’s name—so we need to give it a new name to verify that everything is working properly.
+
+Click the Send button and verify that the API response was successful:
+
+![My image](./updating_a_card_successfully_response.png)
+ 
+And check whether the card with the given name (Card_name_Updated) appears on the Trello board:
+
+![My image](./Trello_updating_card.png)
+
+### Delete a Card
+
+To delete a card, we need to use the **DEL** method. The `id` is a required parameter, plus the `APIKey` and `APIToken` (they don’t appear in the required-parameters list, but they do show up in the URL info). So let’s toss all of this into Postman and see what happens!
+
+![My image](./delete_a_card.png)
+
+Just copy and paste the URL provided in Postman: 
+
+![My image](./postman_delete_a_card.png)
+
+As mentioned, the `id` is a required parameter and the URL already contains the `id`, but it’s inside {}. We just need to remove the braces and add a : before the `id` so Postman recognizes it as a variable. 
+
+![My image](./adding_id_url_delete.png)
+
+The `id` is the `idCard` we got when we create a new card and you can find it here:
+
+![My image](./id_card.png)
+
+Fill the corresponding fields:
+
+![My image](./postman_fill_fields_delete_card.png)
+
+
+Click the Send button and verify that the API response was successful:
+
+![My image](./delete_a_card_successfully_response.png)
+ 
+And check whether the card with the given name (Card_name_Updated) appears on the Trello board:
+
+![My image](./Trello_deleted_card.png)
+
+### Delete a Board
+
+
+
 
 
 
