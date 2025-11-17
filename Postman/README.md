@@ -13,6 +13,12 @@
   - [Updating a Card](#updating-a-card)
   - [Delete a Card](#delete-a-card)
   - [Delete a Board](#delete-a-board)
+- [How a URL works?](#how-a-url-works)
+- [Use Variables instead of static fields](#use-variables-instead-of-static-fields)
+  - [Creating Global Variables in Postman](#creating-global-variables-in-postman)
+  - [Global vs Environment Variables, What's the Difference????](#global-vs-environment-variables-whats-the-difference)
+  - [Creating Environment Variables in Postman](#creating-environment-variables-in-postman)
+- [Parsing Json response values](#parsing-json-response-values)
 
 ## What exaclty is Postman??
 Postman is an all-in-one API platform used not only by developers, but also by testers. It helps us build, test, and manage APIs in a simple and intuitive way.
@@ -288,6 +294,182 @@ Click the Send button and verify that the API response was successful:
 And check whether the card with the given name (Card_name_Updated) appears on the Trello board:
 
 ![My image](./postman_trello_howto_images/board_not_found.png)
+
+
+So, this was nice, but we ended up doing a lot of things manually and repeatedly adding the same parameters. Personally, I don’t like this very much, because the chances of making a mistake are higher. And if, for example, our `APIkey` or `APItoken` changes, we would need to update it in every request we created. So let’s try to avoid that and think about how we can improve this.
+
+To learn how to do this, check the section [Use Variables instead of static fields](#use-variables-instead-of-static-fields).
+
+But if you’re not familiar with how a URL works, you may want to read [How a URL works?](#how-a-url-works) first.
+
+## How a URL works?
+
+A URL is the address we use to access something on the internet, like a webpage, or an API. It tells the browser or Postman where to go and what to request.
+
+Let's pick up the Trello's url example: 
+
+https://api.trello.com/1/cards?id=12345&name=MyCard
+
+A URL is made up of four main parts:
+
+1. Protocol
+     - Defines how the communication happens:
+      
+        **http**: normal communication
+        
+        **https**: safe communication (encripted)
+
+2. Domain (or host)
+     - It's the address of the server:
+    
+        **api.trello.com**
+
+3. Path
+     - Shows the specific resource we want to access on the server:
+  
+        **/1/cards**:
+
+        **/1/** indicates the version
+    
+        **/cards** indicates we are interact with the cards
+
+4. Parameters
+     - Extra information we send with the request, they come after the ? and are separated by &:
+  
+        **id=1234**
+        
+        **name=MyCard**
+
+![My image](./postman_trello_howto_images/how_url_works.png)
+
+
+## Use Variables instead of static fields
+
+Using variables in Postman makes your requests easier to manage and much less error-prone.
+
+Variables help us:
+
+**Avoid repetition** – You don’t need to type the same values (`APIkey`, `APItoken`, IDs…) in every request.
+
+**Reduce mistakes** – Fewer manual edits means fewer typos.
+
+**Update values quickly** – If something changes (like your `APIkey` or `APItoken`), you only update it once, and all requests stay up to date.
+
+**Use different environments** – Easily switch between Development, Test, and Production with their own variable sets.
+
+**Keep things clean and organized** – Your URLs become simpler and easier to read.
+
+**Improve security** – Sensitive data isn’t exposed directly in every request.
+
+So let's use variable in our Postman project!!
+
+Currently, Postman supports multiple types of variables, such as global, collection, environment, and local variables.
+
+If a variable with the same name exists in more than one scope, the value from the scope with the highest priority will be used.
+
+For example, if both a global variable and a local variable are named username, the local value will be used when the request runs. This is why we need to be careful when defining variables in different scopes—variables with the same name may cause unexpected behavior.
+
+###  Creating Global Variables in Postman
+
+**Step 1 — Open the Variables Panel**
+
+Click on the Variable in request icon in the top-right corner of Postman:
+ 
+![My image](./postman_trello_howto_images/vars_in_request_button.png)
+
+**Step 2 — Add Global Variables**
+
+In the Globals section, click on ***Globals*** , then add your variables.
+
+For example, we can add the `baseURL`, `APIkey` and `APItoken` because we know we will use them in all of our requests:
+ 
+![My image](./postman_trello_howto_images/global_vars.png)
+
+**Step 3 - Add variables in the requests**
+
+Open each request and substitute the hard-coded values with the corresponding variable names defined in the Globals. Replace the `baseURL` directly in the request URL as well, as shown in the image below:
+
+![My image](./postman_trello_howto_images/replaced_variables_values.png)
+
+**Why this helps???**
+
+If your `baseURL` or `APIkey` or `APItoken` ever changes, you only updated them once in ***Globals*** and Postman updated all requesrs automatically with the new data.
+
+### Global vs Environment Variables, What's the Difference????
+
+🌍 **Global Variables**
+
+    👉  Accessible everywhere in the entire workspace
+
+    👉  Shared across all collections and requests
+
+    👉  Can become confusing if you have many projects
+
+    👉  Best for values that are needed across multiple projects
+
+    👉  Good for quick tests or early prototyping
+
+
+
+🌱 **Environment Variables**
+
+    👉 Belong to a specific environment
+
+    👉 Perfect for project-specific values
+
+    👉 Ideal when switching between:
+
+    👉 Development
+
+    👉 Testing
+
+    👉 Production
+
+    👉 Cleaner and safer than globals
+
+
+**Use environment variables instead of globals whenever possible!**
+
+
+###  Creating Environment Variables in Postman
+
+**Step 1 — Open the Environment Panel**
+
+Click on the Variable in request icon in the top-right corner of Postman:
+
+![My image](./postman_trello_howto_images/vars_in_request_button.png)
+
+In the Environment section, click on ***Add*** , then add your variables
+
+**Step 2 — Give Your Environment a Name and Add Your Variables**
+
+Example of a Environment name: Trello Test Environment
+
+Variables names:
+
+![My image](./postman_trello_howto_images/trello_test_env.png)
+
+If you check the request and have the environment you created previously selected, you can hover over any variable to see that the values being used now come from the environment variables:
+
+![My image](./postman_trello_howto_images/trello_test_env_.png)
+
+If you switch the environment back to ‘No environment’, the global variables will be used again:
+
+![My image](./postman_trello_howto_images/trello_test_env_no_env.png)
+
+
+Now that we have our project a bit more organized, I think we can automate it a little more.
+
+## Parsing Json response values
+
+
+
+
+
+
+
+
+
 
 
 
