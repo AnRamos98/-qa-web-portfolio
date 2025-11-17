@@ -286,7 +286,6 @@ Fill the corresponding fields:
 
 ![My image](./postman_trello_howto_images/postman_fill_fields_delete_board.png)
 
-
 Click the Send button and verify that the API response was successful:
 
 ![My image](./postman_trello_howto_images/delete_a_board_successfully_response.png)
@@ -461,6 +460,8 @@ If you switch the environment back to ‘No environment’, the global variables
 Now that we have our project a bit more organized, I think we can automate it a little more.
 
 ## Parsing Json response values
+
+(on going)
 
 
 
