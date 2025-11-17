@@ -260,6 +260,34 @@ And check whether the card with the given name (Card_name_Updated) appears on th
 
 ### Delete a Board
 
+To delete a board, we need to use the **DEL** method. The `id` is a required parameter, plus the `APIKey` and `APIToken` (they don’t appear in the required-parameters list, but they do show up in the URL info). So let’s toss all of this into Postman and see what happens!
+
+![My image](./postman_trello_howto_images/delete_a_board.png)
+
+Just copy and paste the URL provided in Postman: 
+
+![My image](./postman_trello_howto_images/postman_delete_a_board.png)
+
+As mentioned, the `id` is a required parameter and the URL already contains the `id`, but it’s inside {}. We just need to remove the braces and add a : before the `id` so Postman recognizes it as a variable. 
+
+![My image](./postman_trello_howto_images/adding_id_url_delete.png)
+
+The `id` is the `idBoard` we got when we create a new board and you can find it here:
+
+![My image](./postman_trello_howto_images/id_board.png)
+
+Fill the corresponding fields:
+
+![My image](./postman_trello_howto_images/postman_fill_fields_delete_board.png)
+
+
+Click the Send button and verify that the API response was successful:
+
+![My image](./postman_trello_howto_images/delete_a_board_successfully_response.png)
+ 
+And check whether the card with the given name (Card_name_Updated) appears on the Trello board:
+
+![My image](./postman_trello_howto_images/board_not_found.png)
 
 
 
