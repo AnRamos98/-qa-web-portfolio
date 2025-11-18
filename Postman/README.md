@@ -253,8 +253,7 @@ The `id` is the `idCard` we got when we create a new card and you can find it he
 
 Fill the corresponding fields:
 
-![My image](./postman_trello_howto_images/postman_fill_fields_delete_card.png)
-
+![My image](./postman_trello_howto_images/postman_fill_fields_delete_card.PNG)
 
 Click the Send button and verify that the API response was successful:
 
@@ -272,7 +271,7 @@ To delete a board, we need to use the **DEL** method. The `id` is a required par
 
 Just copy and paste the URL provided in Postman: 
 
-![My image](./postman_trello_howto_images/postman_delete_a_board.png)
+![My image](./postman_trello_howto_images/postman_delete_a_board.PNG)
 
 As mentioned, the `id` is a required parameter and the URL already contains the `id`, but it’s inside {}. We just need to remove the braces and add a : before the `id` so Postman recognizes it as a variable. 
 
@@ -284,16 +283,15 @@ The `id` is the `idBoard` we got when we create a new board and you can find it 
 
 Fill the corresponding fields:
 
-![My image](./postman_trello_howto_images/postman_fill_fields_delete_board.png)
+![My image](./postman_trello_howto_images/postman_fill_fields_delete_board.PNG)
 
 Click the Send button and verify that the API response was successful:
 
 ![My image](./postman_trello_howto_images/delete_a_board_successfully_response.png)
  
-And check whether the card with the given name (Card_name_Updated) appears on the Trello board:
+And check whether the board has been removed from Trello:
 
 ![My image](./postman_trello_howto_images/board_not_found.png)
-
 
 So, this was nice, but we ended up doing a lot of things manually and repeatedly adding the same parameters. Personally, I don’t like this very much, because the chances of making a mistake are higher. And if, for example, our `APIkey` or `APItoken` changes, we would need to update it in every request we created. So let’s try to avoid that and think about how we can improve this.
 
@@ -388,7 +386,7 @@ For example, we can add the `baseURL`, `APIkey` and `APItoken` because we know w
 
 Open each request and substitute the hard-coded values with the corresponding variable names defined in the Globals. Replace the `baseURL` directly in the request URL as well, as shown in the image below:
 
-![My image](./postman_trello_howto_images/replaced_variables_values.png)
+![My image](./postman_trello_howto_images/replaced_variables_values.PNG)
 
 **Why this helps???**
 
