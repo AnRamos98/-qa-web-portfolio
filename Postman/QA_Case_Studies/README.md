@@ -4,11 +4,9 @@
 - [Analysis: inconsistencies and errors](#analysis-inconsistencies-and-errors)
 - [Questions for PO/Dev](#questions-for-podev)
 - [Test Cases](#test-cases)
-
-
-
-
-
+  - [✅ Positive Test Cases](#-positive-test-cases)
+  - [❌ Negative Test Cases](#-negative-test-cases)
+  - [🧪 Edge Test Cases](#-edge-test-cases)
 
 ## Introduction
 
@@ -210,7 +208,7 @@ The following questions help clarify ambiguous requirements and show critical th
 
 ## Test Cases
 
-✅ Positive Test Cases
+### ✅ Positive Test Cases
 
 | TC ID      | Description                                      | Steps                                                                 | Input                    | Expected Result                                                                                              |
 |------------|--------------------------------------------------|-----------------------------------------------------------------------|--------------------------|--------------------------------------------------------------------------------------------------------------|
@@ -221,7 +219,7 @@ The following questions help clarify ambiguous requirements and show critical th
 | PT_05      | Response matches expected schema                 | 1. Send GET /product/P1001 2. Validate against JSON Schema           | id = "P1001"            | 200 OK. All required fields present and types are correct.                                                   |
 
 
-❌ Negative Test Cases
+### ❌ Negative Test Cases
 
 | TC ID      | Description                                      | Steps                                          | Input           | Expected Result                                                                            |
 |------------|--------------------------------------------------|------------------------------------------------|-----------------|--------------------------------------------------------------------------------------------|
@@ -232,7 +230,7 @@ The following questions help clarify ambiguous requirements and show critical th
 | NT_05      | Invalid Accept or Content-Type header            | 1. GET /product/P1001 with Accept: application/xml | id = "P1001" | 406 Not Acceptable or default JSON error response.                                         |
 
 
-🧪 Edge Test Cases
+### 🧪 Edge Test Cases
 
 | TC ID      | Description                                       | Steps                                                             | Input                             | Expected Result                                                                                          |
 |------------|---------------------------------------------------|-------------------------------------------------------------------|-----------------------------------|-----------------------------------------------------------------------------------------------------------|
