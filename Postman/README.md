@@ -291,7 +291,7 @@ Click the Send button and verify that the API response was successful:
  
 And check whether the board has been removed from Trello:
 
-![My image](./postman_trello_howto_images/board_not_found.png)
+![My image](./postman_trello_howto_images/board_not_found.PNG)
 
 So, this was nice, but we ended up doing a lot of things manually and repeatedly adding the same parameters. Personally, I don’t like this very much, because the chances of making a mistake are higher. And if, for example, our `APIkey` or `APItoken` changes, we would need to update it in every request we created. So let’s try to avoid that and think about how we can improve this.
 

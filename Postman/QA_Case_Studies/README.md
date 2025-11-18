@@ -1,4 +1,18 @@
-This case studies will give you a real, hands-on exercise.
+**Table of Contents:**
+
+- [Introduction](#introduction)
+- [Analysis: inconsistencies and errors](#analysis-inconsistencies-and-errors)
+- [Questions for PO/Dev](#questions-for-podev)
+- [Test Cases](#test-cases)
+
+
+
+
+
+
+## Introduction
+
+This case studie will give you a real, hands-on exercise.
 
 Below you can find a JSON response from an API endpoint.
 
