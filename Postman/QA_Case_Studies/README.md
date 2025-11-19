@@ -1,22 +1,38 @@
 **Table of Contents:**
 
 - [Introduction](#introduction)
-- [Analysis: inconsistencies and errors](#analysis-inconsistencies-and-errors)
-- [Questions for PO/Dev](#questions-for-podev)
-- [Test Cases](#test-cases)
-  - [✅ Positive Test Cases](#-positive-test-cases)
-  - [❌ Negative Test Cases](#-negative-test-cases)
-  - [🧪 Edge Test Cases](#-edge-test-cases)
+- [Endpoint GET / product](#endpoint-get--product)
+  - [Analysis: inconsistencies and errors](#analysis-inconsistencies-and-errors)
+  - [Questions for PO/Dev](#questions-for-podev)
+  - [Test Cases](#test-cases)
+    - [✅ Positive Test Cases](#-positive-test-cases)
+    - [❌ Negative Test Cases](#-negative-test-cases)
+    - [🧪 Edge Test Cases](#-edge-test-cases)
+- [Endpoint POST / product](#endpoint-post--product)
+  - [Analysis: inconsistencies and errors](#analysis-inconsistencies-and-errors-1)
+  - [Questions for PO/Dev](#questions-for-podev-1)
+  - [Test Cases](#test-cases-1)
+    - [✔️ Positive Test Cases](#️-positive-test-cases)
+    - [❌ Negative Test Cases](#-negative-test-cases-1)
+    - [🧪 Edge Cases](#-edge-cases)
 
 ## Introduction
 
-This case studie will give you a real, hands-on exercise.
+This case study will give you a real, hands-on exercise.
 
 Below you can find a JSON response from an API endpoint.
 
-This JSON contains several (actually, many 😅) issues, and our goal is to identify **all** the problems and inconsistencies. 
+This JSON contains several (actually, many 😅) issues that a QA should identify.
 
-After that, we will document the questions we would ask to the PO/Dev to clarify ambiguous points, and finally, we will create test cases (positive, negative and of course edge cases!).
+Your tasks:
+
+- Identify all problems and inconsistencies in the request
+- 
+- Review the response (created below) and identify issues
+
+- Ask clarification questions to PO/Dev
+
+- Write positive, negative and of couse edge test cases
 
 Ready to go? Yeahhh 🎉
 
@@ -24,7 +40,10 @@ The structure to consider:
 
 **Category → Product → Variant → Stock → Price**
 
-JSON example:
+
+## Endpoint GET / product
+
+JSON RESPONSE BODY example:
 
 Endpoint: GET /product/{id}
 ```
@@ -84,7 +103,7 @@ Endpoint: GET /product/{id}
 }
 ```
 
-## Analysis: inconsistencies and errors
+### Analysis: inconsistencies and errors
 
 **IDs and data types:**
   - `id` is a string ("P1001"), but variant IDs are mixed types:
@@ -158,7 +177,7 @@ Endpoint: GET /product/{id}
     - What is it indended for? Optional? Dynamic?
 
 
-## Questions for PO/Dev
+### Questions for PO/Dev
 
 The following questions help clarify ambiguous requirements and show critical thinking.
 
@@ -206,9 +225,9 @@ The following questions help clarify ambiguous requirements and show critical th
 21. Should all dates include timezone information?
 
 
-## Test Cases
+### Test Cases
 
-### ✅ Positive Test Cases
+#### ✅ Positive Test Cases
 
 | TC ID      | Description                                      | Steps                                                                 | Input                    | Expected Result                                                                                              |
 |------------|--------------------------------------------------|-----------------------------------------------------------------------|--------------------------|--------------------------------------------------------------------------------------------------------------|
@@ -219,7 +238,7 @@ The following questions help clarify ambiguous requirements and show critical th
 | PT_05      | Response matches expected schema                 | 1. Send GET /product/P1001 2. Validate against JSON Schema           | id = "P1001"            | 200 OK. All required fields present and types are correct.                                                   |
 
 
-### ❌ Negative Test Cases
+#### ❌ Negative Test Cases
 
 | TC ID      | Description                                      | Steps                                          | Input           | Expected Result                                                                            |
 |------------|--------------------------------------------------|------------------------------------------------|-----------------|--------------------------------------------------------------------------------------------|
@@ -230,7 +249,7 @@ The following questions help clarify ambiguous requirements and show critical th
 | NT_05      | Invalid Accept or Content-Type header            | 1. GET /product/P1001 with Accept: application/xml | id = "P1001" | 406 Not Acceptable or default JSON error response.                                         |
 
 
-### 🧪 Edge Test Cases
+#### 🧪 Edge Test Cases
 
 | TC ID      | Description                                       | Steps                                                             | Input                             | Expected Result                                                                                          |
 |------------|---------------------------------------------------|-------------------------------------------------------------------|-----------------------------------|-----------------------------------------------------------------------------------------------------------|
@@ -239,3 +258,182 @@ The following questions help clarify ambiguous requirements and show critical th
 | ET_03      | Product with large number of variants             | 1. GET /product/{id} for product with 100+ variants              | id = product with many variants   | 200 OK. API handles pagination or large payload performance correctly.                                   |
 | ET_04      | Product missing optional fields                   | 1. GET /product/{id} with no tags or metadata                    | id = product missing optional data | 200 OK. Missing optional fields handled gracefully.                                                      |
 | ET_05      | Inconsistent date formats                         | 1. GET /product/P1001                                            | id = "P1001"                      | 200 OK. Client handles date parsing or identifies need to standardize API date formats.                 |
+
+
+
+## Endpoint POST / product
+
+This POST example is intentionally incorrect.
+
+The JSON payload we are sending contains multiple validation errors, and in a real, well implemented API, we wouldn't expect to receive a 201 (Created) response.
+
+A properly designed API should return a 4xx error, such as 400 (Bad Request) or 422 (Unprocessable Entity), indicating that the input is invalid.
+
+However, for the purpose of this exercise, we are simulating a scenario where the API is poorly implemented and still returns a successful 201 response, even though the request payload is invalid.
+
+This allow us to:
+
+- analyze both the incorrect POST request and the incorrect API response,
+- identify validation gaps,
+- highlight inconsistencies,
+- and evaluate the behaviour of an API that does not enforce proper data validation.
+
+**In short:
+We know the payload is wrong. We know the response status is wrong.
+This is deliberate — we are testing how to analyze and reason about a faulty API.**
+
+Let's go!
+
+JSON REQUEST BODY example:
+
+Endpoint: POST /product/{id}
+```
+{
+  "id": "P-200",
+  "name": "Nike Pegasus",
+  "category_id": 10,
+  "description": 1234,
+  "status": "Active",
+  "variants": [
+    {
+      "id": 3001,
+      "color": "Blue",
+      "size": "42",
+      "stock": {
+        "quantity": "100",
+        "warehouse_id": "WH1"
+      },
+      "price": {
+        "currency": "EUR",
+        "amount": "130.00",
+        "discount": "15%"
+      }
+    },
+    {
+      "id": 3002,
+      "color": "Green",
+      "size": 43,
+      "stock": {
+        "quantity": -2,
+        "warehouse_id": 2
+      },
+      "price": {
+        "currency": "usd",
+        "amount": null
+      }
+    }
+  ],
+  "tags": ["men", null, 12],
+  "metadata": {
+    "rating": "5",
+    "sort_order": "first",
+    "extra": {}
+  }
+}
+```
+
+JSON RESPONSE example:
+
+```
+{
+  "product_id": 200,
+  "status": "created",
+  "message": "Product created sucessfully",
+  "created_at": "20-03-2025T10:00",
+  "warnings": [
+    "discount format invalid",
+    null,
+    150
+  ],
+  "debug": true,
+  "metadata": {
+    "version": "v1"
+  }
+}
+```
+
+### Analysis: inconsistencies and errors
+
+**product_id**
+ - The request sen ```"P-200"```
+ - The response returned ```200``` (number)
+    - Inconsistent ID between request and response
+
+**status**
+  - ```"created"``` is in lowercase
+    - If this is an enum, it should be uppercase: ```"CREATED"```
+
+**message**
+  - ```"sucessfully"``` contains a typo
+    - It should be ```"successfully"```
+
+**created_at**
+  - ```"20-03-2025T10:00"```
+    - Invalid format (DD-MM-YYYY + missing second + missing "Z" + mixed styles)
+  - Correct format should be: ```"2025-03-20T10:00:00Z"```
+
+**warnings**
+  - Contains:
+    - a valid string
+    - ```null```
+    - a number
+      - **Warnings list should be 100% strings**
+
+**debug**
+  - ```"debug": true```
+    - Debug flags should not be included in production environments
+
+**metadata.version**
+  - ```"version": "v1"```
+    - Ok, but it is not part of the product creation
+    - The response should remain consistent
+
+
+### Questions for PO/Dev
+
+1. Does the API return the same ID that was sent, or does it generate a new one?
+2. Is "created" the expected status value? Does casing matter (uppercase vs lowercase)?
+3. What is the official date format the API should follow in responses?
+4. Should warnings always be an array of strings?
+5. Should debug information ever be returned in non-development environments?
+6. Does the API always include metadata fields such as version in its responses?
+7. Is the success message standardized across the API?
+
+
+### Test Cases
+
+#### ✔️ Positive Test Cases
+
+| TC ID | Description                               | Input (JSON Extract)                                                                                                                        | Expected Result                               |
+|-------|--------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------|
+| PT_01 | Create product with valid data             | `{ "name": "Nike Pegasus", "category_id": 10, "description": "Running shoe", "variants": [{ "id": 3001, "color": "Blue", "size": 42, "stock": { "quantity": 100, "warehouse_id": 1 }, "price": { "currency": "EUR", "amount": 130, "discount": 10 }}] }` | 201 Created + product_id                      |
+| PT_02 | Create product with a single valid variant | `{ "name": "Nike Zoom", "category_id": 5, "description": "Lightweight shoe", "variants": [{ "id": 4001, "color": "Black", "size": 41, "stock": { "quantity": 50, "warehouse_id": 2 }, "price": { "currency": "EUR", "amount": 110 }}] }` | 201 Created                                   |
+| PT_03 | Create product without metadata            | `{ "name": "Adidas Solar", "category_id": 8, "description": "Training shoe", "variants": [{ "id": 4267, "color": "Green", "size": 43, "stock": { "quantity": 20, "warehouse_id": 3 }, "price": { "currency": "EUR", "amount": 95 }}] }` | 201 Created                                   |
+| PT_04 | Response uses ISO8601 timestamp            | Any valid POST request                                                                                                                      | created_at must match `YYYY-MM-DDTHH:MM:SSZ`  |
+
+
+#### ❌ Negative Test Cases
+
+| TC ID | Description                      | Input (JSON Extract)                                                                                                                          | Expected Result                                 |
+|-------|-----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------|
+| NT_01 | Negative stock value              | `{ "variants": [{ "stock": { "quantity": -5, "warehouse_id": 1 }, "price": { "currency": "EUR", "amount": 80 }}] }`                            | 400 / 422 - quantity cannot be negative         |
+| NT_02 | Discount in invalid format        | `{ "variants": [{ "price": { "currency": "EUR", "amount": 100, "discount": "15%" }}] }`                                                        | 400 - discount must be a number                 |
+| NT_03 | Amount is null                    | `{ "variants": [{ "price": { "currency": "EUR", "amount": null }}] }`                                                                          | 400 - amount is required                        |
+| NT_04 | Tags contain invalid types        | `{ "tags": ["men", null, 123] }`                                                                                                                | 400 - tags must be an array of strings          |
+| NT_05 | Currency in lowercase             | `{ "variants": [{ "price": { "currency": "usd", "amount": 50 }}] }`                                                                             | 400 - currency must follow ISO uppercase format |
+| NT_06 | Description is not a string       | `{ "description": 12345 }`                                                                                                                     | 400 - description must be a string              |
+
+
+#### 🧪 Edge Cases
+
+| TC ID | Description                    | Input (JSON Extract)                                                                    | Expected Result                                     |
+|-------|--------------------------------|------------------------------------------------------------------------------------------|-----------------------------------------------------|
+| ET_01 | Product without variants        | `{ "name": "Test", "category_id": 1, "variants": [] }`                                   | 400 OR allowed (business rule dependent)            |
+| ET_02 | Product with 100 variants       | `{ "variants": [ {...} x100 ] }`                                                         | 201 Created / Performance OK                        |
+| ET_03 | Duplicate variant IDs           | `{ "variants": [{ "id": 1 }, { "id": 1 }] }`                                            | 409 Conflict OR 400 Bad Request                     |
+| ET_04 | Extremely high price            | `{ "variants": [{ "price": { "currency": "EUR", "amount": 999999 }}] }`                 | Validation error OR accepted (depends on limits)    |
+| ET_05 | Category does not exist         | `{ "name": "Test", "category_id": 9999, "variants": [] }`                               | 404 Not Found OR 400 Bad Request                    |
+
+
+
+ 
