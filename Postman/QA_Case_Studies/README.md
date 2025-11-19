@@ -27,7 +27,7 @@ This JSON contains several (actually, many 😅) issues that a QA should identif
 Your tasks:
 
 - Identify all problems and inconsistencies in the request
-- 
+  
 - Review the response (created below) and identify issues
 
 - Ask clarification questions to PO/Dev
@@ -112,7 +112,7 @@ Endpoint: GET /product/{id}
     - 2003 -> number
       - **ID types should be consistent across all entities**
   - `category_id` is a number, but in many systems IDs follow one consistent type (often strings).
-      - Not necessarily wromg, but it should be clearly defined and consistent across the API.
+      - Not necessarily wrong, but it should be clearly defined and consistent across the API.
 
 **Variants / attributes:**
   - `size` appears as a string ("42") and also as a number (41).
@@ -280,7 +280,7 @@ This allow us to:
 
 **In short:
 We know the payload is wrong. We know the response status is wrong.
-This is deliberate — we are testing how to analyze and reason about a faulty API.**
+This is deliberate, we are testing how to analyze and reason about a faulty API.**
 
 Let's go!
 
